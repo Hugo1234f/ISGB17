@@ -4,6 +4,7 @@
 const express = require("express");
 const fs = require("fs");
 const jsdom = require("jsdom");
+const blogPosts = require("./blogPosts");
 
 let app = express();
 
@@ -17,7 +18,6 @@ app.get('/', (req, res) => {
     });
 
     let dom = new jsdom.JSDOM(indexFile.toString);
-
     let sectionTag = dom.window.document.querySelector("section");
 });
 
