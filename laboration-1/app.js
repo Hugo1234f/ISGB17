@@ -1,27 +1,45 @@
-"Use strict"
+"use strict";
 
-//Laboration 1
 const express = require("express");
 const fs = require("fs");
 const jsdom = require("jsdom");
+const bodyParser = require('body-parser');
 const blogPosts = require("./blogPosts");
 
 let app = express();
+app.use(bodyParser.urlencoded({ extended: true })); 
 
-
-
-
-app.get('/', (req, res) => {
-    let indexFile = fs.readFileSync("./index.html", (err, data) => {
-        if (err){ throw err;}
-        console.log(data);
-    });
-
-    let dom = new jsdom.JSDOM(indexFile.toString);
-    let sectionTag = dom.window.document.querySelector("section");
+app.listen(3000, () => {
+    console.log("server is running...");
 });
 
-app.listen(3000);
+app.get('/', (req, res) => {
+    fs.readFile(__dirname + "/index.html", (err, data) => {
+        if(err) throw err;
+        
+        let page = data;
+        let vDom = new jsdom.JSDOM(page);
 
+        let sectionRef = vDom.window.document.querySelector("section");
+        for(let i = 0; i < blogPosts["blogPosts"].length; i++) {
+            let h4Ref = vDom.window.document.createElement("h4");
+            h4Ref.innerText = blogPosts["blogPosts"][i];
+            sectionRef.appendChild(h4Ref);
+        }
 
+        res.send(vDom.serialize());
+        
+    });
+});
 
+app.get("/skriv", (req, res) => {
+    fs.readFile(__dirname + "/skriv.html", (err, data) => {
+        if(err) throw err;
+        let page = data;
+        res.send(page.toString());
+    });
+});
+
+app.post("/skriv", (req, res) => {
+    
+});
