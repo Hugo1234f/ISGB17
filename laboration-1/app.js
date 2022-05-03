@@ -41,5 +41,19 @@ app.get("/skriv", (req, res) => {
 });
 
 app.post("/skriv", (req, res) => {
-    
+    try {
+        if(req.body.subject === "") {throw new Error("Subject empty");}
+        if(req.body.subject.length < 3) {throw new Error("Subject lenght less than 3");}
+
+        if(req.body.msgbody === "") {throw new Error("Msg empty");}
+        if(req.body.msgbody.length < 10) {throw new Error("Msg length less than 10");}
+
+        if(req.body.nickname === "") {throw new Error("Name empty");}
+        if(req.body.nickname.length < 3) {throw new Error("Name length less than 3");}
+
+
+    } catch(e) {
+        console.log(e);
+        res.redirect("/skriv");
+    }
 });
