@@ -5,6 +5,7 @@ const fs = require("fs");
 const jsdom = require("jsdom");
 const bodyParser = require("body-parser");
 const blogPosts = require("./blogPosts");
+const { listenerCount } = require("process");
 
 let app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -21,36 +22,31 @@ app.get("/", (req, res) => {
     let vDom = new jsdom.JSDOM(page);
 
     let section = vDom.window.document.querySelector("section");
-    let text = null;
 
     for (let i = 0; i < blogPosts.blogPosts.length; i++) {
-      let para = vDom.window.document.createElement("p");
-
-      let nickNameText = vDom.window.document.createTextNode(
-        blogPosts.blogPosts[i]["nickName"]
-      );
-      let msgSubjectText = vDom.window.document.createTextNode(
-        blogPosts.blogPosts[i]["msgSubject"]
-      );
-      let timeStampText = vDom.window.document.createTextNode(
-        blogPosts.blogPosts[i]["timeStamp"]
-      );
-      let msgBodyText = vDom.window.document.createTextNode(
-        blogPosts.blogPosts[i]["msgBody"]
-      );
-
       let ele = vDom.window.document.createElement("h4");
       section.appendChild(ele);
 
-      /*
-        TODO: 
-        FORMATTERA MED RADBRYTNING
-      */
-
-      ele.appendChild(nickNameText);
-      ele.appendChild(msgSubjectText);
-      ele.appendChild(timeStampText);
-      ele.appendChild(msgBodyText);
+      // Metoden hittad ifrån https://stackoverflow.com/questions/19438895/add-a-new-line-in-innerhtml
+      ele.innerHTML = JSON.stringify(
+        "<div style='box-sizing: content-box; border: 1px solid black; background-color: lightgray;'>" +
+          "<span class='alert-primary' style='padding: 0%; margin: 0%;'>Användarnamn:</span> " +
+          blogPosts.blogPosts[i]["nickName"] +
+          " Datum: " +
+          blogPosts.blogPosts[i]["timeStamp"] +
+          "<br>" +
+          "<br>" +
+          "<span class='alert-success' style='padding: 0%; margin: 0%;'>Ämne:</span> " +
+          blogPosts.blogPosts[i]["msgSubject"] +
+          "<br>" +
+          "<br>" +
+          "<div style='background-color: lightgray; font-size: 80%;'>" +
+          blogPosts.blogPosts[i]["msgBody"] +
+          "</div>" +
+          "</div>",
+        null,
+        4
+      ).replaceAll('"', "");
     }
 
     res.send(vDom.serialize());
@@ -86,13 +82,13 @@ app.post("/skriv", (req, res) => {
       throw new Error("Name length less than 3");
     }
 
-    let date = new Date().toString();
+    let date = new Date();
 
     // let sub
     blogPosts.blogPosts.push({
       nickName: req.body.nickname,
       msgSubject: req.body.subject,
-      timeStamp: date,
+      timeStamp: date.toISOString().split("T")[0],
       msgBody: req.body.msgbody,
     });
 
