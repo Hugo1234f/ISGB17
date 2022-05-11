@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
 
       // Metoden hittad ifrån https://stackoverflow.com/questions/19438895/add-a-new-line-in-innerhtml
       ele.innerHTML = JSON.stringify(
-        "<div style='box-sizing: content-box; border: 1px solid black; background-color: lightgray;'>" +
+      "<div style='box-sizing: content-box; border: 1px solid black; background-color: lightgray;'>" +
       "<span class='alert-primary' style='padding: 0%; margin: 0%;'>Användarnamn:</span> " +
       blogPosts.blogPosts[i]["nickName"] +
       " Datum: " +
