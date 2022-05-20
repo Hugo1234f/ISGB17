@@ -48,14 +48,8 @@ app.get("/public/images/uil.svg", function (req, res) {
   res.sendFile(__dirname + "/public/images/uil.svg");
 });
 
-app.get("/public/scripts/cliet-script.js", function (req, res) {
-  res.sendFile(__dirname + "/public/scripts/cliet-script.js");
+io.on("connection", function (socket) {
+  socket.on("clickad", function (data) {
+    console.log("klickade fan");
+  });
 });
-
-// io.on("connection", function(socket) {
-//   console.log("User connected");
-
-//   socket.on("clickad", function(data){
-//     console.log("klickade fan");
-//   });
-// });
