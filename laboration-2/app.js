@@ -10,7 +10,7 @@ const bodyParser = require("body-parser");
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 const cookieParser = require("cookie-parser");
-const { Socket } = require("socket.io");
+//const { Socket } = require("socket.io");
 // const e = require("express");
 
 app.use(cookieParser());
@@ -86,11 +86,11 @@ app.post("/index.html", (req, res) => {
   });
 });
 
-io.on("connection", (Socket) => {
+io.on("connection", function(socket) {
   console.log("User connected");
 
-  io.on("rndcol", function() {
-    console.log("testade knappfan")
+  socket.on("clickad", function(data){
+    console.log("klickade fan");
   });
 });
 
