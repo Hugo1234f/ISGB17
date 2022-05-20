@@ -17,13 +17,16 @@ addEventListener("load", (e) => {
           throw new Error("Måste vara minst två tecken.");
         }
 
-        // Send it!
-        // socket.emit("")
+        let targetArea = document.querySelector("section");
+        let h4 = document.createElement("h4");
+        let textNode = document.createTextNode(text);
+        h4.appendChild(textNode);
+        targetArea.appendChild(h4);
       } catch (error) {
         console.log(error.message);
       }
     });
-    console.log(submitButton);
-    console.log("TEEEST (index.html)");
-  } catch (e) {}
+  } catch (e) {
+    console.log(e.message);
+  }
 });
