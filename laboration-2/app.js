@@ -52,6 +52,10 @@ app.get("/client-script.js", function (req, res) {
   res.sendFile(__dirname + "/client-script.js");
 });
 
-// io.on("connection", (socket) => {
-//   console.log("Ny användare anslöt via socket...");
-// });
+io.on("connection", function(socket) {
+  console.log("User connected");
+
+  socket.on("clickad", function(data){
+    console.log("klickade fan");
+  });
+});
