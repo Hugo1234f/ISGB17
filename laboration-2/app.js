@@ -44,12 +44,14 @@ app.post("/", (req, res) => {
   }
 });
 
-app.get("/public/images/uil.svg", function (req, res) {
-  res.sendFile(__dirname + "/public/images/uil.svg");
-});
-
 io.on("connection", function (socket) {
   socket.on("clickad", function (data) {
     console.log("klickade fan");
+
+    let cookie = socket["handshake"]["headers"]["cookie"].split("=")[1];
+
+    console.log(cookie + ": " + data);
+    let sendIt = cookie + ": " + data;
+    io.sockets.emit("pushaMsg", sendIt);
   });
 });
