@@ -3,7 +3,6 @@
 const socket = io();
 
 function ban(text) {
-  console.log("Knapp klickad");
   socket.emit("clickad", text);
 }
 
@@ -35,6 +34,5 @@ addEventListener("load", (e) => {
     pElement.appendChild(textNode);
     let flowyBoi = document.getElementById("flow");
     flowyBoi.appendChild(pElement);
-    console.log(data);
   });
 });
