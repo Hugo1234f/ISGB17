@@ -10,13 +10,15 @@ const bodyParser = require("body-parser");
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 const cookieParser = require("cookie-parser");
+const { Socket } = require("socket.io");
 // const e = require("express");
 
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use("/public", express.static(__dirname+"/public"));
 
-app.listen(port, (err) => {
+http.listen(port, (err) => {
   if (err) {
     throw err;
   } else {
@@ -83,6 +85,15 @@ app.post("/index.html", (req, res) => {
     }
   });
 });
+
+io.on("connection", (Socket) => {
+  console.log("User connected");
+
+  io.on("rndcol", function() {
+    console.log("testade knappfan")
+  });
+});
+
 
 /*
 KODEN NEDANFÖR TAGET FRÅN WORKSHOP GITHUB
