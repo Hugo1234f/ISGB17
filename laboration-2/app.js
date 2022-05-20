@@ -54,6 +54,6 @@ io.on("connection", function(socket) {
 
     console.log(cookie + ': ' + data);
     let sendIt = cookie + ': ' + data;
-    socket.emit("pushaMsg", sendIt);
+    io.sockets.emit("pushaMsg", sendIt);
    });
  });
