@@ -44,18 +44,13 @@ app.post("/", (req, res) => {
   }
 });
 
-app.get("/public/images/uil.svg", function (req, res) {
-  res.sendFile(__dirname + "/public/images/uil.svg");
-});
+io.on("connection", function(socket) {
+   console.log("User connected");
 
-app.get("/public/scripts/cliet-script.js", function (req, res) {
-  res.sendFile(__dirname + "/public/scripts/cliet-script.js");
-});
+   socket.on("clickad", function(data){
+     console.log("klickade fan");
 
-// io.on("connection", function(socket) {
-//   console.log("User connected");
+    console.log(data);
 
-//   socket.on("clickad", function(data){
-//     console.log("klickade fan");
-//   });
-// });
+   });
+ });
