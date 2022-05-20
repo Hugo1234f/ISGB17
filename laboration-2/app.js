@@ -52,8 +52,13 @@ io.on("connection", function(socket) {
 
     let cookie = socket["handshake"]["headers"]["cookie"].split('=')[1];
 
+ 
+    let time = new Date();
+    time.getFullYear() + '-' + ('0' + time.getDate()).slice(-2) + '-' + ('0' + (time.getMonth() + 1)).slice(-2);
     console.log(cookie + ': ' + data);
-    let sendIt = cookie + ': ' + data;
+    let sendIt = time + " " + cookie + ': ' + data;
+
     io.sockets.emit("pushaMsg", sendIt);
    });
+
  });
