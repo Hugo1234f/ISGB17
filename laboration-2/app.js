@@ -68,30 +68,14 @@ app.post("/", (req, res) => {
   });
 });
 
-app.post("/index.html", (req, res) => {
-  fs.readFile(__dirname + "/index.html", (err, data) => {
-    let dom = new jsDOM.JSDOM(data);
-    try {
-      let dom = new jsDOM.JSDOM(data);
-      if (req.body.msg.length < 2) {
-        throw new Error("Minst två tecken");
-      }
-      console.log("WORKS");
-    } catch (error) {
-      console.log(error.message);
-      console.log(errorMsg.textContent);
-    }
-  });
-});
-
 /*
 KODEN NEDANFÖR TAGET FRÅN WORKSHOP GITHUB
 */
 
-// app.get("/favicon.ico", function (req, res) {
-//   console.log("FAV!");
-//   res.sendFile(__dirname + "/favicon.ico");
-// });
+app.get("/public/images/uil.svg", function (req, res) {
+  console.log("FAV!");
+  res.sendFile(__dirname + "/public/images/uil.svg");
+});
 
 // io.on("connection", (socket) => {
 //   console.log("Ny användare anslöt via socket...");
