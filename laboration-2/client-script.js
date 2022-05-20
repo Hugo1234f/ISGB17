@@ -1,11 +1,10 @@
 "use strict";
 
 addEventListener("load", (e) => {
-    var url = window.location.pathname;
 
-    if(window.location.pathname.split("/").pop() === "index.html") {
-        console.log("TEEEST");
+    try { //------------------index.html------------------------------
         const submitButton = document.getElementById("send-msg");
+        
         submitButton.addEventListener("click", (e) => {
             console.log("test");
             try {
@@ -22,6 +21,11 @@ addEventListener("load", (e) => {
             }
             });
         console.log(submitButton);
+        console.log("TEEEST (index.html)");
+    }catch(e) {//-------------------------loggain.html--------------------
+        console.log("teest (loggain.html)");
     }
+        
+    
   
 });
