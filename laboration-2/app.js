@@ -50,7 +50,10 @@ io.on("connection", function(socket) {
    socket.on("clickad", function(data){
      console.log("klickade fan");
 
-    console.log(data);
+    let cookie = socket["handshake"]["headers"]["cookie"].split('=')[1];
 
+    console.log(cookie + ': ' + data);
+    console.log();
+    
    });
  });
