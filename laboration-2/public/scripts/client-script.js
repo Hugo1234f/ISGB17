@@ -25,4 +25,14 @@ addEventListener("load", (e) => {
         console.log(error.message);
       }
     });
+
+socket.on("pushaMsg", function(data){
+    let pElement = document.createElement("p");
+    let textNode = document.createTextNode(data);
+    pElement.appendChild(textNode);
+    let flowyBoi = document.getElementById("flow");
+    flowyBoi.appendChild(pElement);
+    console.log(data);
+});
+
 });
