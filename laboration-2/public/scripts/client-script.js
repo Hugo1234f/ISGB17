@@ -8,7 +8,5 @@ window.addEventListener("load", ()=> {
 
 function ban() {
     console.log("Knapp klickad");
-    socket.emit("clickad");
+    socket.emit("clickad", );
 };
-
-  

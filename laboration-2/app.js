@@ -10,8 +10,6 @@ const bodyParser = require("body-parser");
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 const cookieParser = require("cookie-parser");
-//const { Socket } = require("socket.io");
-// const e = require("express");
 
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -42,7 +40,7 @@ app.get("/", (req, res) => {
       res.cookie("nickName", name);
     });
   } else {
-    console.log("else statement");
+    console.log("else cookie inte undefined");
     fs.readFile(__dirname + "/index.html", (err, data) => {
       res.sendFile(__dirname + "/index.html");
     });
@@ -61,6 +59,7 @@ app.post("/", (req, res) => {
         throw new Error("Ditt användarnamn måste vara längre än 3 bokstäver");
       }
       name = req.body.nickname;
+      res.redirect("/index");
     } catch (error) {
       console.log(error.message);
       let errorMsg = dom.window.document.querySelector("#error-msg");
