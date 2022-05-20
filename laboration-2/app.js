@@ -10,7 +10,7 @@ const bodyParser = require("body-parser");
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 const cookieParser = require("cookie-parser");
-const e = require("express");
+// const e = require("express");
 
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -35,16 +35,19 @@ app.get("/", (req, res) => {
       res.sendFile(__dirname + "/loggain.html");
       vDom = new jsDOM.JSDOM(data);
       console.log("No cookies set");
+      res.cookie("name", name);
     });
   } else {
+    console.log("else statement");
     fs.readFile(__dirname + "/index.html", (err, data) => {
       res.sendFile(__dirname + "/index.html");
       console.log("User have cookies");
-      next(); // <-- important!
+      console.log("cookie is: " + cookie);
     });
   }
 });
 
+let name = null;
 app.post("/", (req, res) => {
   console.log("send it!");
   fs.readFile(__dirname + "/loggain.html", (err, data) => {
@@ -52,13 +55,15 @@ app.post("/", (req, res) => {
     try {
       let dom = new jsDOM.JSDOM(data);
       if (req.body.nickname.length < 5) {
-        throw new Error("Ditt användarnamn måste vara längre än 3 bokstäver");
+        throw new Error("Ditt användarnamn måste vara längre än 5 bokstäver");
       }
+      name = req.body.nickname;
     } catch (error) {
       console.log(error.message);
       let errorMsg = dom.window.document.querySelector("#error-msg");
       console.log(errorMsg.textContent);
-      errorMsg.textContent = error.message;
+      errorMsg.innerHTML = error.message;
+      // res.redirect("back");
     }
   });
 });
