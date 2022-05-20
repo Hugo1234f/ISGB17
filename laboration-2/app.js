@@ -53,7 +53,6 @@ io.on("connection", function(socket) {
     let cookie = socket["handshake"]["headers"]["cookie"].split('=')[1];
 
     console.log(cookie + ': ' + data);
-    console.log();
     
    });
  });
