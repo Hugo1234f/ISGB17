@@ -7,7 +7,7 @@ window.addEventListener("load", ()=> {
 });
 
 function ban() {
-    Socket.EventEmitter("rndcol", "clicked....");
+    socket.emit("rndcol", "clicked....");
 };
 
   
