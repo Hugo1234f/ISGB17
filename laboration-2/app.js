@@ -70,34 +70,6 @@ app.post("/", (req, res) => {
   });
 });
 
-<<<<<<< HEAD
-app.post("/index.html", (req, res) => {
-  fs.readFile(__dirname + "/index.html", (err, data) => {
-    let dom = new jsDOM.JSDOM(data);
-    try {
-      let dom = new jsDOM.JSDOM(data);
-      if (req.body.msg.length < 2) {
-        throw new Error("Minst två tecken");
-      }
-      console.log("WORKS");
-    } catch (error) {
-      console.log(error.message);
-      console.log(errorMsg.textContent);
-    }
-  });
-});
-
-io.on("connection", function(socket) {
-  console.log("User connected");
-
-  socket.on("clickad", function(data){
-    console.log("klickade fan");
-  });
-});
-
-
-=======
->>>>>>> main
 /*
 KODEN NEDANFÖR TAGET FRÅN WORKSHOP GITHUB
 */
