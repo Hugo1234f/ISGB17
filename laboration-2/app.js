@@ -73,8 +73,11 @@ KODEN NEDANFÖR TAGET FRÅN WORKSHOP GITHUB
 */
 
 app.get("/public/images/uil.svg", function (req, res) {
-  console.log("FAV!");
   res.sendFile(__dirname + "/public/images/uil.svg");
+});
+
+app.get("/client-script.js", function (req, res) {
+  res.sendFile(__dirname + "/client-script.js");
 });
 
 // io.on("connection", (socket) => {
