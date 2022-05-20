@@ -44,16 +44,16 @@ app.post("/", (req, res) => {
   }
 });
 
-io.on("connection", function(socket) {
-   console.log("User connected");
+io.on("connection", function (socket) {
+  console.log("User connected");
 
-   socket.on("clickad", function(data){
-     console.log("klickade fan");
+  socket.on("clickad", function (data) {
+    console.log("klickade fan");
 
-    let cookie = socket["handshake"]["headers"]["cookie"].split('=')[1];
+    let cookie = socket["handshake"]["headers"]["cookie"].split("=")[1];
 
-    console.log(cookie + ': ' + data);
-    let sendIt = cookie + ': ' + data;
+    console.log(cookie + ": " + data);
+    let sendIt = cookie + ": " + data;
     io.sockets.emit("pushaMsg", sendIt);
-   });
- });
+  });
+});
