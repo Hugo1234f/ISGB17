@@ -70,6 +70,7 @@ app.post("/", (req, res) => {
   });
 });
 
+<<<<<<< HEAD
 app.post("/index.html", (req, res) => {
   fs.readFile(__dirname + "/index.html", (err, data) => {
     let dom = new jsDOM.JSDOM(data);
@@ -95,14 +96,19 @@ io.on("connection", (Socket) => {
 });
 
 
+=======
+>>>>>>> main
 /*
 KODEN NEDANFÖR TAGET FRÅN WORKSHOP GITHUB
 */
 
-// app.get("/favicon.ico", function (req, res) {
-//   console.log("FAV!");
-//   res.sendFile(__dirname + "/favicon.ico");
-// });
+app.get("/public/images/uil.svg", function (req, res) {
+  res.sendFile(__dirname + "/public/images/uil.svg");
+});
+
+app.get("/client-script.js", function (req, res) {
+  res.sendFile(__dirname + "/client-script.js");
+});
 
 // io.on("connection", (socket) => {
 //   console.log("Ny användare anslöt via socket...");
