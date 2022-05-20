@@ -40,7 +40,7 @@ app.post("/", (req, res) => {
     res.cookie("nickName", req.body.nickname);
     res.redirect("/");
   } catch (error) {
-    res.send(e);
+    res.send(error.message);
   }
 });
 
@@ -48,14 +48,14 @@ app.get("/public/images/uil.svg", function (req, res) {
   res.sendFile(__dirname + "/public/images/uil.svg");
 });
 
-app.get("/client-script.js", function (req, res) {
-  res.sendFile(__dirname + "/client-script.js");
+app.get("/public/scripts/cliet-script.js", function (req, res) {
+  res.sendFile(__dirname + "/public/scripts/cliet-script.js");
 });
 
-io.on("connection", function(socket) {
-  console.log("User connected");
+// io.on("connection", function(socket) {
+//   console.log("User connected");
 
-  socket.on("clickad", function(data){
-    console.log("klickade fan");
-  });
-});
+//   socket.on("clickad", function(data){
+//     console.log("klickade fan");
+//   });
+// });
