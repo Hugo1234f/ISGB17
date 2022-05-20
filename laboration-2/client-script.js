@@ -23,7 +23,7 @@ addEventListener("load", (e) => {
         console.log(submitButton);
         console.log("TEEEST (index.html)");
     }catch(e) {//-------------------------loggain.html--------------------
-        console.log("teest (loggain.html)");
+        
     }
         
     
