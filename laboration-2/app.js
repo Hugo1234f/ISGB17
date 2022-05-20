@@ -40,7 +40,7 @@ app.post("/", (req, res) => {
     res.cookie("nickName", req.body.nickname);
     res.redirect("/");
   } catch (error) {
-    res.send(e);
+    res.send(error.message);
   }
 });
 
