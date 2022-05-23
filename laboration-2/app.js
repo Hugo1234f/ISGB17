@@ -13,13 +13,17 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use("/public", express.static("public"));
 
-let myServer = http.listen(port, function () {
-  console.log("Server running on port number: " + myServer.address().port);
-});
+let myServer;
+try {
+  myServer = http.listen(port, function () {
+    console.log("Server running on port number: " + myServer.address().port);
+  });
+} catch (e) {
+  console.log("ERROR: porten" + port + " används redan");
+}
 
 app.get("/", (req, res) => {
   let cookie = req.cookies.nickName;
-  console.log("Hej");
 
   if (cookie === undefined) {
     res.sendFile(__dirname + "/loggain.html");
@@ -29,7 +33,6 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-  console.log("send it!");
   let namn = req.body.nickname;
 
   try {
@@ -43,11 +46,11 @@ app.post("/", (req, res) => {
     res.send(error.message);
   }
 });
+
 var cookie = require("cookie"); //installed from npm;
+
 io.on("connection", function (socket) {
   socket.on("clickad", function (data) {
-    console.log("klickade fan");
-
     var cookief = socket.handshake.headers.cookie;
     var cookies = cookie.parse(socket.handshake.headers.cookie);
 
