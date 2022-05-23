@@ -43,15 +43,27 @@ app.post("/", (req, res) => {
     res.send(error.message);
   }
 });
-
+var cookie = require("cookie"); //installed from npm;
 io.on("connection", function (socket) {
   socket.on("clickad", function (data) {
     console.log("klickade fan");
 
-    let cookie = socket["handshake"]["headers"]["cookie"].split("=")[1];
+    var cookief = socket.handshake.headers.cookie;
+    var cookies = cookie.parse(socket.handshake.headers.cookie);
 
-    console.log(cookie + ": " + data);
-    let sendIt = cookie + ": " + data;
-    io.sockets.emit("pushaMsg", sendIt);
+    console.log(cookief);
+    console.log(cookies);
+    // We check if the cookie key is equal to nickName
+    if (cookies["nickName"]) {
+      console.log("true");
+      let sendIt = cookies["nickName"] + ": " + data;
+      io.sockets.emit("pushaMsg", sendIt);
+    }
+
+    // let cookie = socket["handshake"]["headers"]["cookie"].split("=")[1];
+
+    // console.log(cookie + ": " + data);
+    // let sendIt = cookie + ": " + data;
+    // io.sockets.emit("pushaMsg", sendIt);
   });
 });
